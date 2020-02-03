@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
@@ -54,7 +56,7 @@ public class WeatherServiceImpl implements WeatherService {
             if (responseEntity.getStatusCodeValue() == 200) {
                 strBody = responseEntity.getBody();
             }
-            ops.set(key, strBody);
+            ops.set(key, strBody, TIME_OUT, TimeUnit.SECONDS);
         }else {
             logger.info("找到缓存" +  key);
             strBody = ops.get(key);
