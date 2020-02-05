@@ -1,5 +1,6 @@
-package com.billy.service;
+package com.billy.service.impl;
 
+import com.billy.service.WeatherService;
 import com.billy.vo.WeatherResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -38,6 +39,28 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public WeatherResponse getDataByCityName(String cityName) {
         return getWeatherData(WEATHER_API + "?city=" + cityName);
+    }
+
+    @Override
+    public void syncDataByCityId(String cityId) {
+
+        this.saveWeatherData(WEATHER_API + "?citykey=" + cityId);
+    }
+
+    /**
+     * 保存天气预报数据
+     * @param uri
+     */
+    private void saveWeatherData(String uri) {
+
+        ValueOperations<String, String> ops = this.stringRedisTemplate.opsForValue();
+
+        String strBody = null;
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
+        if (responseEntity.getStatusCodeValue() == 200) {
+            strBody = responseEntity.getBody();
+        }
+        ops.set(uri, strBody, TIME_OUT, TimeUnit.SECONDS);
     }
 
     // 增加redis 缓存处理
