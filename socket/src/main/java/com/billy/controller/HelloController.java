@@ -18,6 +18,11 @@ public class HelloController {
         return "Hello world, welcome!";
     }
 
+    @RequestMapping("/")
+    public String hello() {
+        return "hello, billy";
+    }
+
     @RequestMapping("/index")
     public ModelAndView getPage(Model model) {
 

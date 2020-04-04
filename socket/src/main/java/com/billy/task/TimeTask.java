@@ -30,6 +30,7 @@ public class TimeTask {
             try {
                 myWebSocket.sendMessage(" 定时任务发送：" + new Date().toString());
             } catch (IOException e) {
+                logger.error("定时发送消息异常", e);
                 e.printStackTrace();
             }
         });
