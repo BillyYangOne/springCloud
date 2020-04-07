@@ -28,9 +28,9 @@ springcloud 相关
      
 1. msa-weather-collection-server 数据采集
 
-2.  msa-weather-data-server 数据API
+2.  msa-weather-data-server 天气数据API
 
 3.  msa-weather-city-server 城市数据API
 
-4.  msa-weather-report-server 微服务
+4.  msa-weather-report-server 天气预报
 
