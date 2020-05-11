@@ -1,0 +1,9 @@
+logging:
+  config: classpath:logback.xml
+  level:
+    dao: debug
+    org:
+      mybatis: debug
+
+spring:
+  profiles: dev
