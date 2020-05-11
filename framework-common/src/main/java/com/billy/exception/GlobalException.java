@@ -36,4 +36,11 @@ public class GlobalException {
         logger.error(ExceptionUtil.getMessage(e));
         return R.setResult(ResultCodeEnum.NULL_POINT_ERROR);
     }
+
+    @ExceptionHandler(CustomException.class)
+    @ResponseBody
+    public R error(CustomException e) {
+        logger.error(ExceptionUtil.getMessage(e));
+        return R.error().message(e.getMessage()).code(e.getCode());
+    }
 }
